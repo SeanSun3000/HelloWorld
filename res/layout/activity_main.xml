@@ -28,9 +28,9 @@
 
     <FrameLayout
         android:id="@+id/main_fragmentContainer"
-        android:layout_below="@id/main_btn1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_btn1" >
     </FrameLayout>
 
 </RelativeLayout>

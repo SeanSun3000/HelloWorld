@@ -7,10 +7,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class Fragment1 extends Fragment
 {
 	public static final String TAG = MainActivity.TAG;
+	public static final String BUNDLE_KEY_WORD = "word";
+
+	private String mShow;
+
+	public static Fragment1 newInstance(String word)
+	{
+		Fragment1 fragment1 = new Fragment1();
+		Bundle bundle = new Bundle();
+		bundle.putString(BUNDLE_KEY_WORD, word);
+		fragment1.setArguments(bundle);
+
+		return fragment1;
+	}
 
 	@Override
 	public void onAttach(Activity activity)
@@ -24,6 +38,9 @@ public class Fragment1 extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
+		if (getArguments() != null) {
+			mShow = getArguments().getString(BUNDLE_KEY_WORD);
+		}
 		Log.d(TAG, "fg: onCreate");
 	}
 
@@ -32,7 +49,12 @@ public class Fragment1 extends Fragment
 			Bundle savedInstanceState)
 	{
 		View v = inflater.inflate(R.layout.fragment_fg1, container, false);
+		TextView tv = (TextView) v.findViewById(R.id.fg1_tv);
+		if (mShow != null) {
+			tv.setText(mShow);
+		}
 		Log.d(TAG, "fg: onCreateView");
+
 		return v;
 	}
 
@@ -84,7 +106,7 @@ public class Fragment1 extends Fragment
 		super.onDestroy();
 		Log.d(TAG, "fg: onDestroy");
 	}
-	
+
 	@Override
 	public void onDetach()
 	{

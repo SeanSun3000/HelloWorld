@@ -13,6 +13,7 @@ public class MainActivity extends Activity implements OnClickListener
 {
 	public static final String TAG = "hello";
 	private Button mBtn;
+	private int i = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -85,8 +86,18 @@ public class MainActivity extends Activity implements OnClickListener
 		if (v.getId() == R.id.main_btn1) {
 			// System.exit(-1);
 			// Process.killProcess(Process.myPid());
+			// finish();
 
-			finish();
+			i++;
+			StringBuilder sb = new StringBuilder();
+			for (int j = 0; j < 10; j++) {
+				sb.append(i);
+			}
+			FragmentManager rm = getFragmentManager();
+			rm.beginTransaction()
+					.replace(R.id.main_fragmentContainer,
+							Fragment1.newInstance(sb.toString()))
+					.addToBackStack(null).commit();
 		}
 	}
 }
